@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test/**/*.test.js"
+    "test": "mocha --timeout 30000 test/**/*.test.js"
+  },
+  "engines": {
+    "node": ">=12",
+    "npm": ">=6"
   },
   "author": "Vishal Kumar",
   "license": "ISC",
