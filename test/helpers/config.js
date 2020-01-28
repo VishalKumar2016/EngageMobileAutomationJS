@@ -1,15 +1,20 @@
+const { isAndroidPlatform, getEnvironment } = require('../helpers/utils');
+const { app, appPackage } = require(`../${getEnvironment()}.env`);
 
+module.exports.getCaps = () => isAndroidPlatform() ? androidCaps : iosCaps;
 
-const DEFAULT_ANDROID_DEVICE_NAME = process.env.SAUCE_LABS ? 'Android GoogleAPI Emulator' : 'My Android Device';
-const DEFAULT_ANDROID_PLATFORM_VERSION = process.env.SAUCE_LABS ? '7.1' : null;
-
-module.exports.androidCaps = {
+const androidCaps = {
   platformName: 'Android',
   automationName: 'UiAutomator2',
   deviceName: 'My Android Device',
   platformVersion: null,
   appActivity: 'com.engage.SplashActivity',
-  app: "/Users/mac/Documents/Atom/Json/ReactNative/appium/Engage_Mobile_Maven/app-staging-debug.apk"
+  appPackage,
+  app,
+};
+
+const iosCaps = {
+  platformName: 'ios',
 };
 
 module.exports.serverConfig = {
