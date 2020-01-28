@@ -2,4 +2,5 @@ screenshots/
 test-output/
 node_modules/
 nohup.out
+test/.DS_Store
 
