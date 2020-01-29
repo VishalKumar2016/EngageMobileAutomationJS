@@ -13,9 +13,17 @@ const getClearText = (driver) => isAndroid ?
    driver.elementByXPath("//android.widget.ImageView") :
    driver.elementByXPath("(//*/XCUIElementTypeOther)[28]");
 
+const getEnterPassword = (driver) => isAndroid ? 
+   driver.elementByXPath("(//android.widget.EditText)[1]") :
+   driver.elementByXPath("(//XCUIElementTypeOther[@name=\"Password\"])[4]/XCUIElementTypeSecureTextField");
+
 const getNextButton = (driver) => isAndroid ? 
    driver.elementByXPath("//android.widget.TextView[@text='Next']") :
    driver.elementByXPath("(//*/XCUIElementTypeOther)[18]");
+
+const getPasswordVerificationText = (driver) => isAndroid ?
+driver.elementByXPath("(//android.widget.ImageView)[1]") :
+driver.elementByXPath("(//*/XCUIElementTypeOther)[18]");
 
 const getBackArrow = (driver) => isAndroid ?
 driver.elementByXPath("(//android.widget.ImageView)[1]") :
@@ -60,8 +68,8 @@ const clickNext = async (driver) => {
   if (next.isDisplayed()) {
     await next.click();
   }
-  const backArrow = await getBackArrow(driver);
-  return backArrow.isDisplayed();
+  const enterPasswordText = await getEnterPassword(driver).text();
+  return assert.equal(enterPasswordText, 'Password');
 }
 
 const clickBackArrow = async (driver) => {
@@ -78,10 +86,8 @@ const clickForgotPassword = async (driver) => {
   if (forgotPassword.isDisplayed()) {
     await forgotPassword.click();
   }
-  const forgotPasswordText = await getForgotPasswordTextVerification(driver).text;
-  // TODO
-  // return assert.equal(forgotPasswordText, forgotPassText)
-  return true;
+  const forgotPasswordText = await getForgotPasswordTextVerification(driver);
+  return forgotPasswordText.isDisplayed();
 }
 
 const clickForgotPasswordBackArrow = async (driver) => {
