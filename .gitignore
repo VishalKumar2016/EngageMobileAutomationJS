@@ -3,4 +3,5 @@ test-output/
 node_modules/
 nohup.out
 test/.DS_Store
+test/auth/.DS_Store
 
